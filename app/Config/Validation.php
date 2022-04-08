@@ -40,4 +40,40 @@ class Validation
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+    public $siswa = [
+		'nis' => 'required|integer',
+		'nama' => 'required|string',
+		'gender' => 'required|string',
+		'ttl' => 'required',
+		'email' => 'required',
+		'alamat' => 'required',
+		'kelas_id' => 'required',
+	];
+
+    public $siswa_errors = [
+		'nis' => [
+			'required' => 'NIS wajib diisi',
+			'integer' => 'NIS hanya dapat diisi angka',
+		],
+		'nama' => [
+			'required' => 'Nama Siswa wajib diisi',
+			'string' => 'Nama Siswa hanya dapat diisi huruf',
+		],
+		'gender' => [
+			'required' => 'Jenis Kelamin wajib diisi',
+			'string' => 'Jenis Kelamin hanya dapat diisi huruf',
+		],
+		'ttl' => [
+			'required' => 'Tempat & Tanggal Lahir Lahir wajib diisi',
+		],
+		'email' => [
+			'required' => 'Tanggal Lahir wajib diisi',
+		],
+        'alamat' => [
+			'required' => 'Alamat wajib diisi',
+		],
+        'kelas_id' => [
+			'required' => 'Kelas wajib diisi',
+		],
+	];
 }
