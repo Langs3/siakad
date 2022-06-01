@@ -16,39 +16,39 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h1>Tabel Siswa</h1>
+                    <h1>Tabel Guru</h1>
                 </div>
                 <div class="col-2">
-                <a href="<?php echo base_url('siswa/add') ?>" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
+                <a href="<?php echo base_url('guru/add') ?>" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
                 </div>
             </div>
             <table class="table table-bordered table-hover table-striped table-responsive">
                 <thead class="thead-dark">
                     <tr>
-                        <th>NIS</th>
+                        <th>NPWP</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>Tempat Tanggal Lahir</th>
                         <th>Email</th>
                         <th>Alamat</th>
-                        <th>Kelas</th>
+                        <th>Mata Pelajaran</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($siswa as $key => $siswa) : ?>
+                    <?php foreach ($guru as $key => $guru) : ?>
 
                         <tr>
-                            <td><?php echo $siswa['nis'] ?></td>
-                            <td><?php echo $siswa['nama'] ?></td>
-                            <td><?php echo $siswa['gender'] ?></td>
-                            <td><?php echo $siswa['ttl'] ?></td>
-                            <td><?php echo $siswa['email'] ?></td>
-                            <td><?php echo $siswa['alamat'] ?></td>
-                            <td><?php echo $siswa['kelas_id'] ?></td>
+                            <td><?php echo $guru['npwp'] ?></td>
+                            <td><?php echo $guru['nama'] ?></td>
+                            <td><?php echo $guru['gender'] ?></td>
+                            <td><?php echo $guru['ttl'] ?></td>
+                            <td><?php echo $guru['email'] ?></td>
+                            <td><?php echo $guru['alamat'] ?></td>
+                            <td><?php echo $guru['mapel'] ?></td>
                             <td class="text-center">
-                                <a href="<?php echo base_url('siswa/edit/' . $siswa['nis']) ?>" class="btn btn-primary">EDIT</a>
-                                <a href="<?= base_url('/siswa/delete/' . $siswa['nis'])?>" class="btn btn-danger" onclick="return confirm('Yakin akan dihapus')">Hapus</a>
+                                <a href="<?php echo base_url('guru/edit/' . $guru['npwp']) ?>" class="btn btn-primary">EDIT</a>
+                                <a href="<?= base_url('/guru/delete/' . $guru['npwp'])?>" class="btn btn-danger" onclick="return confirm('Yakin akan dihapus')">Hapus</a>
                             </td>
                         </tr>
 

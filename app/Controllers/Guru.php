@@ -2,113 +2,113 @@
 
 namespace App\Controllers;
 
-use App\Models\SiswaModel;
+use App\Models\GuruModel;
 use CodeIgniter\Controller;
 
-class Siswa extends Controller
+class Guru extends Controller
 {
     public function index()
     {
-        $model = new SiswaModel();
+        $model = new GuruModel();
         $pager = \Config\Services::pager();
-        $data['siswa'] = $model->orderBy('nis', 'ASC')->findAll();
-        return view('siswa/index', $data);
+        $data['guru'] = $model->orderBy('npwp', 'ASC')->findAll();
+        return view('guru/index', $data);
     }
     public function add() 
 	{
 		$this->session= \Config\Services::session();
 		if(!isset($_SESSION['inputs'])){
 			$data = array(
-			'nis'=> '',
+			'npwp'=> '',
 			'nama'=> '',
 			'gender'=>  '',
 			'ttl'=>  '',
 			'email'=>  '',
             'alamat'=>  '',
-			'kelas_id'=>  '',
+			'mapel'=>  '',
 			);
 			session()->setFlashdata('inputs', $data);
 		}
-		return view ('/siswa/add');
+		return view ('/guru/add');
 	}
 	public function save() 
 	{
 		helper(['form', 'url']);
         $validation = \Config\Services::validation();
         $data = array(
-            'nis' => $this->request->getPost('nis'),
-            'nama' => $this->request->getPost('nama'),
-            'gender' => $this->request->getPost('gender'),
-            'ttl' => $this->request->getPost('ttl'),
-            'email' => $this->request->getPost('alamat'),
-            'alamat' => $this->request->getPost('email'),
-            'kelas_id' => $this->request->getPost('kelas_id'),
-        );
-
-        if($validation->run($data, 'siswa')) {
-            $model = new SiswaModel();
-            $model->insert($data);
-            session()->setFlashdata('success', 'Berhasil Menyimpan Data Siswa' . $this->request->getPost('siswa'));
-            return redirect()->to(base_url('siswa'));
-        }else{
-            session()->setFlashdata('inputs', $this->request->getPost());
-            session()->setFlashdata('errors', $validation->getErrors());
-            return redirect()->to(base_url('/siswa/add'));
-        }
-	}
-
-	public function edit($nis){
-		$this->session= \Config\Services::session();
-		if(!isset($_SESSION['inputs'])){
-			$data = array(
-                'nis'=> '',
-                'nama'=> '',
-                'gender'=>  '',
-                'ttl'=>  '',
-                'email'=>  '',
-                'alamat'=>  '',
-                'kelas_id'=>  '',
-			);
-			session()->setFlashdata('inputs', $data);
-		}
-		$model = new SiswaModel();
-		$data['siswa'] = $model->where('nis', $nis) ->first();
-		return view('/siswa/edit',$data);
-	}
-
-    public function update() 
-	{
-		helper(['form', 'url']);
-        $nis = $this->request->getPost('nis') ;
-        $validation = \Config\Services::validation();
-        $data = array(
-            'nis' => $this->request->getPost('nis'),
+            'npwp' => $this->request->getPost('npwp'),
             'nama' => $this->request->getPost('nama'),
             'gender' => $this->request->getPost('gender'),
             'ttl' => $this->request->getPost('ttl'),
             'email' => $this->request->getPost('email'),
             'alamat' => $this->request->getPost('alamat'),
-            'kelas_id' => $this->request->getPost('kelas_id'),
+            'mapel' => $this->request->getPost('mapel'),
         );
 
-        if($validation->run($data, 'siswa')) {
-            $model = new SiswaModel();
-            $model->update($nis, $data);
-            session()->setFlashdata('success', 'Berhasil Mengupdate Data Siswa' . $this->request->getPost('siswa'));
-            return redirect()->to(base_url('/siswa'));
+        if($validation->run($data, 'guru')) {
+            $model = new GuruModel();
+            $model->insert($data);
+            session()->setFlashdata('success', 'Berhasil Menyimpan Data Guru' . $this->request->getPost('guru'));
+            return redirect()->to(base_url('guru'));
         }else{
             session()->setFlashdata('inputs', $this->request->getPost());
             session()->setFlashdata('errors', $validation->getErrors());
-            return redirect()->to(base_url('/siswa/edit/', $nis));
+            return redirect()->to(base_url('/guru/add'));
         }
 	}
 
-    public function delete($nis)
+	public function edit($npwp){
+		$this->session= \Config\Services::session();
+		if(!isset($_SESSION['inputs'])){
+			$data = array(
+                'npwp'=> '',
+                'nama'=> '',
+                'gender'=>  '',
+                'ttl'=>  '',
+                'email'=>  '',
+                'alamat'=>  '',
+                'mapel'=>  '',
+			);
+			session()->setFlashdata('inputs', $data);
+		}
+		$model = new GuruModel();
+		$data['guru'] = $model->where('npwp', $npwp) ->first();
+		return view('/guru/edit',$data);
+	}
+
+    public function update() 
+	{
+		helper(['form', 'url']);
+        $npwp = $this->request->getPost('npwp') ;
+        $validation = \Config\Services::validation();
+        $data = array(
+            'npwp' => $this->request->getPost('npwp'),
+            'nama' => $this->request->getPost('nama'),
+            'gender' => $this->request->getPost('gender'),
+            'ttl' => $this->request->getPost('ttl'),
+            'email' => $this->request->getPost('email'),
+            'alamat' => $this->request->getPost('alamat'),
+            'mapel' => $this->request->getPost('mapel'),
+        );
+
+        if($validation->run($data, 'guru')) {
+            $model = new GuruModel();
+            $model->update($npwp, $data);
+            session()->setFlashdata('success', 'Berhasil Mengupdate Data Guru' . $this->request->getPost('guru'));
+            return redirect()->to(base_url('/guru'));
+        }else{
+            session()->setFlashdata('inputs', $this->request->getPost());
+            session()->setFlashdata('errors', $validation->getErrors());
+            return redirect()->to(base_url('/guru/edit/', $npwp));
+        }
+	}
+
+    public function delete($npwp)
     {
-        $model = new SiswaModel();
-        $model->where('nis', $nis)->delete();
-        session()->setFlashdata('success', "Berhasil Menghapus Data Siswa");
-        return redirect()->to(base_url('/siswa'));
+        $model = new GuruModel();
+        $model->where('npwp', $npwp)->delete();
+        session()->setFlashdata('success', "Berhasil Menghapus Data Guru");
+        return redirect()->to(base_url('/guru'));
     }
 }
 ?>

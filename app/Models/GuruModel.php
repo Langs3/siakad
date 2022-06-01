@@ -2,18 +2,18 @@
 
 use CodeIgniter\Model;
 
-class SiswaModel extends Model
+class GuruModel extends Model
 {
-    protected $table = 'siswa';
-    protected $primaryKey = 'nis';
+    protected $table = 'guru';
+    protected $primaryKey = 'npwp';
     protected $allowedFields = [
-        'nis',
+        'npwp',
         'nama',
         'gender',
         'ttl',
         'email',
         'alamat',
-        'kelas_id'
+        'mapel'
     ];
 
     
